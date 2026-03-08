@@ -9,7 +9,7 @@
 body{
 margin:0;
 height:100vh;
-background:linear-gradient(135deg,#ff4da6,#8a2be2,#000000);
+background:linear-gradient(135deg,#ff4da6,#ff99cc,#8a2be2);
 color:white;
 font-family:Arial;
 text-align:center;
@@ -24,31 +24,25 @@ transform:translate(-50%,-50%);
 }
 
 h1{
-font-size:60px;
+font-size:55px;
 }
 
 p{
-font-size:24px;
-max-width:700px;
+font-size:22px;
+max-width:600px;
 margin:auto;
 margin-top:20px;
 }
 
 .heart{
 position:absolute;
-top:-10px;
-color:#ff4da6;
-font-size:24px;
-animation:fall linear infinite;
+font-size:30px;
+animation:fall 5s linear infinite;
 }
 
 @keyframes fall{
-0%{
-transform:translateY(-10px);
-}
-100%{
-transform:translateY(110vh);
-}
+0%{transform:translateY(-10vh);}
+100%{transform:translateY(110vh);}
 }
 </style>
 
@@ -58,35 +52,35 @@ transform:translateY(110vh);
 
 <div class="container">
 
-<h1>Feliz Dia das Mulheres, Ana! 💐</h1>
+<h1>Feliz Dia das Mulheres, Ana! 🌸</h1>
 
 <p>Ana, hoje é um dia especial para celebrar mulheres incríveis como você.</p>
 
-<p>Quero te desejar um Feliz Dia das Mulheres! Que seu dia seja cheio de alegria, carinho e momentos felizes.</p>
+<p>Espero que seu dia seja cheio de alegria, carinho e momentos felizes.</p>
 
-<p>Obrigado por ser uma amiga tão especial. Você merece tudo de melhor hoje e sempre. 💖</p>
+<p>Você é uma amiga muito especial. 💖</p>
+
+<p>Clique na tela para tocar a música 🎵</p>
 
 </div>
 
-<audio autoplay loop>
-<source src="musica.mp3" type="audio/mpeg">
+<audio id="musica" loop>
+<source src="EU TE ESCOLHERIA TODO DIA - PAGODE - PAGODES PARA STATUS.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-function criarCoracao(){
-const heart=document.createElement("div");
-heart.classList.add("heart");
-heart.innerHTML="💖";
+document.body.addEventListener("click", function(){
+document.getElementById("musica").play();
+});
 
+for(let i=0;i<30;i++){
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="💖";
 heart.style.left=Math.random()*100+"vw";
 heart.style.animationDuration=(Math.random()*3+3)+"s";
-
 document.body.appendChild(heart);
-
-setTimeout(()=>{heart.remove()},6000);
 }
-
-setInterval(criarCoracao,300);
 </script>
 
 </body>
