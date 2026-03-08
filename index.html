@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -13,158 +12,219 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-flex-direction:column;
 font-family:Arial;
-text-align:center;
 overflow:hidden;
-color:white;
-
-background:linear-gradient(-45deg,#ff4da6,#ff85c1,#8a2be2,#ff1a75);
-background-size:400% 400%;
-animation:gradiente 10s ease infinite;
+background:linear-gradient(180deg,#0f2027,#203a43,#2c5364);
 }
 
-@keyframes gradiente{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
-}
+/* estrelas */
 
-h1{
-font-size:50px;
-margin-bottom:10px;
-}
-
-#contador{
-font-size:22px;
-margin-bottom:30px;
-}
-
-.carta{
-width:320px;
-height:180px;
+.star{
+position:absolute;
+width:2px;
+height:2px;
 background:white;
-border-radius:12px;
+animation:twinkle 3s infinite;
+}
+
+@keyframes twinkle{
+0%,100%{opacity:0.2;}
+50%{opacity:1;}
+}
+
+/* envelope 3D */
+
+.scene{
+perspective:1000px;
+}
+
+.envelope{
+width:340px;
+height:220px;
+background:#ff4d6d;
+border-radius:10px;
+position:relative;
 cursor:pointer;
-overflow:hidden;
-transition:0.6s;
-color:black;
+transform-style:preserve-3d;
+transition:1s;
+display:flex;
+justify-content:center;
+align-items:center;
+box-shadow:0 20px 40px rgba(0,0,0,0.5);
 }
 
-.carta:hover{
-transform:scale(1.05);
-}
-
-.carta.aberta{
-height:380px;
-}
-
-.carta-fechada{
-font-size:20px;
-padding-top:70px;
-}
-
-.texto{
-opacity:0;
-padding:20px;
+.flap{
+position:absolute;
+top:0;
+width:0;
+height:0;
+border-left:170px solid transparent;
+border-right:170px solid transparent;
+border-top:110px solid #ff758f;
+transform-origin:top;
 transition:1s;
 }
 
-.carta.aberta .texto{
+.envelope.open .flap{
+transform:rotateX(180deg);
+}
+
+.letter{
+position:absolute;
+width:90%;
+height:90%;
+background:white;
+border-radius:10px;
+padding:20px;
+box-sizing:border-box;
+text-align:center;
+font-size:15px;
+transform:translateY(30px);
+opacity:0;
+transition:1s;
+}
+
+.envelope.open .letter{
+transform:translateY(-20px);
 opacity:1;
 }
 
-.heart{
-position:absolute;
-font-size:25px;
-animation:subir 6s linear infinite;
+/* contador */
+
+.counter{
+margin-top:10px;
+color:#ff4d6d;
+font-weight:bold;
 }
 
-@keyframes subir{
-0%{transform:translateY(100vh);}
-100%{transform:translateY(-10vh);}
+/* corações */
+
+.heart{
+position:absolute;
+font-size:20px;
+animation:explode 2s linear forwards;
+}
+
+@keyframes explode{
+0%{
+transform:scale(0);
+opacity:1;
+}
+100%{
+transform:translate(var(--x),var(--y)) scale(1.5);
+opacity:0;
+}
 }
 
 </style>
-
 </head>
 
 <body>
 
-<h1>Ana 💖</h1>
+<div class="scene">
+<div class="envelope" onclick="abrirCarta(this)">
+<div class="flap"></div>
 
-<div id="contador"></div>
+<div class="letter">
 
-<div class="carta" onclick="abrirCarta()" id="carta">
+<p>
+Ana, desde o dia em que começamos nossa amizade, percebi o quanto você é uma pessoa especial.
+</p>
 
-<div class="carta-fechada">
-Clique para abrir a carta 💌
+<p>
+Mesmo conhecendo você há pouco tempo, eu já considero muito a sua amizade. Você trouxe algo diferente para os meus dias, algo leve e verdadeiro, e isso fez com que eu passasse a valorizar muito a sua presença.
+</p>
+
+<p>
+Às vezes não é o tempo que define o quanto alguém se torna importante, mas sim a forma como essa pessoa faz a gente se sentir.
+</p>
+
+<p>
+Obrigado por existir e por fazer parte da minha vida. 💖
+</p>
+
+<p>
+Feliz Dia das Mulheres!  
+Que o seu dia seja repleto de alegrias, carinho e muito amor.
+</p>
+
+<div class="counter">
+Amizade desde 17/02 💕<br>
+<span id="tempo"></span>
 </div>
 
-<div class="texto">
-
-<p>
-Ana, a gente se conhece há pouco tempo, mas mesmo assim eu já percebi o quanto você é uma pessoa especial.
-</p>
-
-<p>
-Às vezes não precisa de muito tempo para perceber quando alguém é incrível, e você é exatamente assim.
-</p>
-
-<p>
-Sua amizade já significa bastante para mim, e eu fico muito feliz de ter te conhecido.
-</p>
-
-<p>
-Espero que nossa amizade continue crescendo cada vez mais, com muitos momentos legais, risadas e histórias para lembrar.
-</p>
-
-<p>
-Você merece muitas coisas boas na sua vida, e eu espero que seu Dia das Mulheres seja incrível. 🌸
-</p>
-
-<p>
-Feliz Dia das Mulheres, Ana! 💖
-</p>
-
 </div>
-
+</div>
 </div>
 
 <script>
 
-function abrirCarta(){
-document.getElementById("carta").classList.toggle("aberta")
+/* abrir carta */
+
+function abrirCarta(el){
+el.classList.toggle("open");
+explodirCoracoes();
 }
 
-let inicio=new Date("2026-02-17")
+/* contador */
+
+const inicio = new Date("2026-02-17 00:00:00");
 
 function atualizar(){
 
-let hoje=new Date()
-let diff=hoje-inicio
+const agora = new Date();
+const diff = agora - inicio;
 
-let dias=Math.floor(diff/(1000*60*60*24))
-let horas=Math.floor(diff/(1000*60*60)%24)
-let minutos=Math.floor(diff/(1000*60)%60)
+const dias = Math.floor(diff / (1000*60*60*24));
+const horas = Math.floor(diff / (1000*60*60)) % 24;
+const minutos = Math.floor(diff / (1000*60)) % 60;
+const segundos = Math.floor(diff / 1000) % 60;
 
-document.getElementById("contador").innerHTML =
-"Amizade há " + dias + " dias, " + horas + " horas e " + minutos + " minutos 💖"
+document.getElementById("tempo").innerHTML =
+`${dias} dias ${horas}h ${minutos}m ${segundos}s`;
 
 }
 
-setInterval(atualizar,1000)
+setInterval(atualizar,1000);
 
-for(let i=0;i<35;i++){
+/* estrelas */
 
-let heart=document.createElement("div")
-heart.className="heart"
-heart.innerHTML="💖"
+for(let i=0;i<120;i++){
 
-heart.style.left=Math.random()*100+"vw"
-heart.style.animationDuration=(Math.random()*3+3)+"s"
+let star=document.createElement("div");
+star.classList.add("star");
 
-document.body.appendChild(heart)
+star.style.left=Math.random()*100+"vw";
+star.style.top=Math.random()*100+"vh";
+
+document.body.appendChild(star);
+
+}
+
+/* explosão de corações */
+
+function explodirCoracoes(){
+
+for(let i=0;i<40;i++){
+
+let heart=document.createElement("div");
+heart.classList.add("heart");
+
+heart.innerHTML="💖";
+
+heart.style.left="50%";
+heart.style.top="50%";
+
+heart.style.setProperty("--x",(Math.random()*400-200)+"px");
+heart.style.setProperty("--y",(Math.random()*400-200)+"px");
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},2000);
+
+}
 
 }
 
