@@ -8,7 +8,8 @@
 <style>
 body{
 margin:0;
-background:linear-gradient(180deg,#ff4da6,#000000);
+height:100vh;
+background:linear-gradient(135deg,#ff4da6,#8a2be2,#000000);
 color:white;
 font-family:Arial;
 text-align:center;
@@ -16,7 +17,10 @@ overflow:hidden;
 }
 
 .container{
-margin-top:15%;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
 }
 
 h1{
@@ -30,16 +34,17 @@ margin:auto;
 margin-top:20px;
 }
 
-.flower{
+.heart{
 position:absolute;
-top:-50px;
+top:-10px;
+color:#ff4da6;
 font-size:24px;
 animation:fall linear infinite;
 }
 
 @keyframes fall{
 0%{
-transform:translateY(-50px);
+transform:translateY(-10px);
 }
 100%{
 transform:translateY(110vh);
@@ -53,31 +58,35 @@ transform:translateY(110vh);
 
 <div class="container">
 
-<h1>Feliz Dia das Mulheres, Ana! 🌸</h1>
+<h1>Feliz Dia das Mulheres, Ana! 💐</h1>
 
 <p>Ana, hoje é um dia especial para celebrar mulheres incríveis como você.</p>
 
 <p>Quero te desejar um Feliz Dia das Mulheres! Que seu dia seja cheio de alegria, carinho e momentos felizes.</p>
 
-<p>Obrigado por ser uma amiga tão especial. Você merece tudo de melhor hoje e sempre. 💐</p>
+<p>Obrigado por ser uma amiga tão especial. Você merece tudo de melhor hoje e sempre. 💖</p>
 
 </div>
 
+<audio autoplay loop>
+<source src="musica.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-function criarFlor(){
-const flor = document.createElement("div");
-flor.classList.add("flower");
-flor.innerHTML="🌸";
+function criarCoracao(){
+const heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="💖";
 
-flor.style.left=Math.random()*100+"vw";
-flor.style.animationDuration=(Math.random()*3+3)+"s";
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(Math.random()*3+3)+"s";
 
-document.body.appendChild(flor);
+document.body.appendChild(heart);
 
-setTimeout(()=>{flor.remove()},6000);
+setTimeout(()=>{heart.remove()},6000);
 }
 
-setInterval(criarFlor,300);
+setInterval(criarCoracao,300);
 </script>
 
 </body>
