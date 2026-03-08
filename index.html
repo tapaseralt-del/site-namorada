@@ -3,84 +3,170 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Feliz Dia das Mulheres, Ana</title>
+<title>Para Ana 💖</title>
 
 <style>
+
 body{
 margin:0;
 height:100vh;
-background:linear-gradient(135deg,#ff4da6,#ff99cc,#8a2be2);
-color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
 font-family:Arial;
 text-align:center;
 overflow:hidden;
+color:white;
+
+background:linear-gradient(-45deg,#ff4da6,#ff85c1,#8a2be2,#ff1a75);
+background-size:400% 400%;
+animation:gradiente 10s ease infinite;
 }
 
-.container{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
+@keyframes gradiente{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
 }
 
 h1{
-font-size:55px;
+font-size:50px;
 }
 
-p{
+#contador{
 font-size:22px;
-max-width:600px;
-margin:auto;
-margin-top:20px;
+margin-bottom:20px;
+}
+
+.carta{
+width:320px;
+height:200px;
+background:white;
+border-radius:10px;
+cursor:pointer;
+position:relative;
+overflow:hidden;
+color:black;
+transition:0.6s;
+}
+
+.carta:hover{
+transform:scale(1.05);
+}
+
+.texto{
+opacity:0;
+padding:20px;
+transition:1s;
+}
+
+.carta.aberta{
+height:340px;
+}
+
+.carta.aberta .texto{
+opacity:1;
 }
 
 .heart{
 position:absolute;
-font-size:30px;
-animation:fall 5s linear infinite;
+font-size:25px;
+animation:subir 6s linear infinite;
 }
 
-@keyframes fall{
-0%{transform:translateY(-10vh);}
-100%{transform:translateY(110vh);}
+@keyframes subir{
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-10vh);}
 }
+
+button{
+margin-top:20px;
+padding:10px 20px;
+border:none;
+border-radius:20px;
+font-size:16px;
+cursor:pointer;
+}
+
 </style>
 
 </head>
 
 <body>
 
-<div class="container">
+<h1>Ana 💖</h1>
 
-<h1>Feliz Dia das Mulheres, Ana! 🌸</h1>
+<div id="contador"></div>
 
-<p>Ana, hoje é um dia especial para celebrar mulheres incríveis como você.</p>
+<div class="carta" onclick="abrirCarta()" id="carta">
 
-<p>Espero que seu dia seja cheio de alegria, carinho e momentos felizes.</p>
+<div class="texto">
 
-<p>Você é uma amiga muito especial. 💖</p>
+<p>
+Ana, desde o dia em que começamos nossa amizade,
+eu percebi o quanto você é uma pessoa especial.
+</p>
 
-<p>Clique na tela para tocar a música 🎵</p>
+<p>
+Obrigado por existir e por fazer parte da minha vida. 💖
+</p>
+
+<p>
+Feliz Dia das Mulheres 🌸
+</p>
 
 </div>
+
+</div>
+
+<button onclick="tocar()">Tocar música 🎵</button>
 
 <audio id="musica" loop>
 <source src="EU TE ESCOLHERIA TODO DIA - PAGODE - PAGODES PARA STATUS.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-document.body.addEventListener("click", function(){
-document.getElementById("musica").play();
-});
 
-for(let i=0;i<30;i++){
-let heart=document.createElement("div");
-heart.className="heart";
-heart.innerHTML="💖";
-heart.style.left=Math.random()*100+"vw";
-heart.style.animationDuration=(Math.random()*3+3)+"s";
-document.body.appendChild(heart);
+function abrirCarta(){
+document.getElementById("carta").classList.toggle("aberta")
 }
+
+function tocar(){
+document.getElementById("musica").play()
+}
+
+let inicio=new Date("2026-02-17")
+let hoje=new Date()
+
+function atualizar(){
+
+let diff=hoje-inicio
+
+let dias=Math.floor(diff/(1000*60*60*24))
+let horas=Math.floor(diff/(1000*60*60)%24)
+let minutos=Math.floor(diff/(1000*60)%60)
+
+document.getElementById("contador").innerHTML=
+"Amizade há "+dias+" dias, "+horas+" horas e "+minutos+" minutos 💖"
+
+}
+
+setInterval(atualizar,1000)
+
+for(let i=0;i<35;i++){
+
+let heart=document.createElement("div")
+heart.className="heart"
+heart.innerHTML="💖"
+
+heart.style.left=Math.random()*100+"vw"
+heart.style.animationDuration=(Math.random()*3+3)+"s"
+
+document.body.appendChild(heart)
+
+}
+
 </script>
 
 </body>
