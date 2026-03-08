@@ -32,37 +32,42 @@ animation:gradiente 10s ease infinite;
 
 h1{
 font-size:50px;
+margin-bottom:10px;
 }
 
 #contador{
 font-size:22px;
-margin-bottom:20px;
+margin-bottom:30px;
 }
 
 .carta{
 width:320px;
-height:200px;
+height:180px;
 background:white;
-border-radius:10px;
+border-radius:12px;
 cursor:pointer;
-position:relative;
 overflow:hidden;
-color:black;
 transition:0.6s;
+color:black;
 }
 
 .carta:hover{
 transform:scale(1.05);
 }
 
+.carta.aberta{
+height:380px;
+}
+
+.carta-fechada{
+font-size:20px;
+padding-top:70px;
+}
+
 .texto{
 opacity:0;
 padding:20px;
 transition:1s;
-}
-
-.carta.aberta{
-height:340px;
 }
 
 .carta.aberta .texto{
@@ -80,15 +85,6 @@ animation:subir 6s linear infinite;
 100%{transform:translateY(-10vh);}
 }
 
-button{
-margin-top:20px;
-padding:10px 20px;
-border:none;
-border-radius:20px;
-font-size:16px;
-cursor:pointer;
-}
-
 </style>
 
 </head>
@@ -101,30 +97,39 @@ cursor:pointer;
 
 <div class="carta" onclick="abrirCarta()" id="carta">
 
+<div class="carta-fechada">
+Clique para abrir a carta 💌
+</div>
+
 <div class="texto">
 
 <p>
-Ana, desde o dia em que começamos nossa amizade,
-eu percebi o quanto você é uma pessoa especial.
+Ana, a gente se conhece há pouco tempo, mas mesmo assim eu já percebi o quanto você é uma pessoa especial.
 </p>
 
 <p>
-Obrigado por existir e por fazer parte da minha vida. 💖
+Às vezes não precisa de muito tempo para perceber quando alguém é incrível, e você é exatamente assim.
 </p>
 
 <p>
-Feliz Dia das Mulheres 🌸
+Sua amizade já significa bastante para mim, e eu fico muito feliz de ter te conhecido.
+</p>
+
+<p>
+Espero que nossa amizade continue crescendo cada vez mais, com muitos momentos legais, risadas e histórias para lembrar.
+</p>
+
+<p>
+Você merece muitas coisas boas na sua vida, e eu espero que seu Dia das Mulheres seja incrível. 🌸
+</p>
+
+<p>
+Feliz Dia das Mulheres, Ana! 💖
 </p>
 
 </div>
 
 </div>
-
-<button onclick="tocar()">Tocar música 🎵</button>
-
-<audio id="musica" loop>
-<source src="EU TE ESCOLHERIA TODO DIA - PAGODE - PAGODES PARA STATUS.mp3" type="audio/mpeg">
-</audio>
 
 <script>
 
@@ -132,23 +137,19 @@ function abrirCarta(){
 document.getElementById("carta").classList.toggle("aberta")
 }
 
-function tocar(){
-document.getElementById("musica").play()
-}
-
 let inicio=new Date("2026-02-17")
-let hoje=new Date()
 
 function atualizar(){
 
+let hoje=new Date()
 let diff=hoje-inicio
 
 let dias=Math.floor(diff/(1000*60*60*24))
 let horas=Math.floor(diff/(1000*60*60)%24)
 let minutos=Math.floor(diff/(1000*60)%60)
 
-document.getElementById("contador").innerHTML=
-"Amizade há "+dias+" dias, "+horas+" horas e "+minutos+" minutos 💖"
+document.getElementById("contador").innerHTML =
+"Amizade há " + dias + " dias, " + horas + " horas e " + minutos + " minutos 💖"
 
 }
 
