@@ -1,17 +1,45 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="pt-BR">
 <head>
+<meta charset="UTF-8">
 <title>Para você ❤️</title>
+
+<style>
+body{
+background: black;
+color: white;
+font-family: Arial;
+text-align: center;
+margin-top: 20%;
+}
+
+h1{
+font-size: 50px;
+}
+
+p{
+font-size: 22px;
+}
+</style>
+
 </head>
 
-<body style="background:black;color:white;text-align:center;margin-top:20%;font-family:Arial;">
+<body>
 
 <h1>Eu te amo ❤️</h1>
 <p>Esse site é só para você.</p>
+<p>Clique em qualquer lugar para ouvir a música 🎵</p>
 
-<audio autoplay loop>
+<audio id="musica" loop>
 <source src="musica.mp3" type="audio/mpeg">
 </audio>
+
+<script>
+document.body.addEventListener("click", function(){
+document.getElementById("musica").play();
+});
+</script>
 
 </body>
 </html>
