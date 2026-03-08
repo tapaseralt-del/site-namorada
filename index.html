@@ -3,26 +3,47 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Feliz Dia das Mulheres</title>
+<title>Feliz Dia das Mulheres, Ana</title>
 
 <style>
 body{
-background:black;
+margin:0;
+background:linear-gradient(180deg,#ff4da6,#000000);
 color:white;
 font-family:Arial;
 text-align:center;
+overflow:hidden;
+}
+
+.container{
 margin-top:15%;
 }
 
 h1{
-font-size:50px;
+font-size:60px;
 }
 
 p{
-font-size:22px;
+font-size:24px;
 max-width:700px;
 margin:auto;
 margin-top:20px;
+}
+
+.flower{
+position:absolute;
+top:-50px;
+font-size:24px;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+0%{
+transform:translateY(-50px);
+}
+100%{
+transform:translateY(110vh);
+}
 }
 </style>
 
@@ -30,13 +51,34 @@ margin-top:20px;
 
 <body>
 
+<div class="container">
+
 <h1>Feliz Dia das Mulheres, Ana! 🌸</h1>
 
 <p>Ana, hoje é um dia especial para celebrar mulheres incríveis como você.</p>
 
-<p>Quero te desejar um Feliz Dia das Mulheres! Que seu dia seja cheio de alegria, carinho e coisas boas.</p>
+<p>Quero te desejar um Feliz Dia das Mulheres! Que seu dia seja cheio de alegria, carinho e momentos felizes.</p>
 
-<p>Obrigado por ser uma amiga tão legal. Você merece tudo de melhor hoje e sempre. 💐</p>
+<p>Obrigado por ser uma amiga tão especial. Você merece tudo de melhor hoje e sempre. 💐</p>
+
+</div>
+
+<script>
+function criarFlor(){
+const flor = document.createElement("div");
+flor.classList.add("flower");
+flor.innerHTML="🌸";
+
+flor.style.left=Math.random()*100+"vw";
+flor.style.animationDuration=(Math.random()*3+3)+"s";
+
+document.body.appendChild(flor);
+
+setTimeout(()=>{flor.remove()},6000);
+}
+
+setInterval(criarFlor,300);
+</script>
 
 </body>
 </html>
